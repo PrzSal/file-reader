@@ -28,7 +28,7 @@ public class DataProvider<PAIR> {
         Collection<PAIR> dataList = new ArrayList<>();
         for(String[] elem : listContent) {
             String[] data = {elem[1], elem[2]};
-            PAIR pair = (PAIR) new Pair<>(new Id(Long.getLong(elem[0])), new Data(data));
+            PAIR pair = (PAIR) new Pair<>(new Id(new Long(elem[0])), new Data(data));
             dataList.add(pair);
         }
         return dataList;
