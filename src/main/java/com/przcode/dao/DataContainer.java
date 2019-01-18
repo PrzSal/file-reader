@@ -40,6 +40,10 @@ public class DataContainer<ID, DATA> {
         listData.removeIf(pair -> pair.getId().equals(id));
     }
 
+    public void printAll(){
+        listData.forEach(pair -> System.out.println(pair.getId().toString() + pair.getData()));
+    }
+
     public Collection<Pair<ID, DATA>> getListData() {
         return listData;
     }
