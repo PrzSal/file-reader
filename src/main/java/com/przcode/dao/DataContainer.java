@@ -36,6 +36,10 @@ public class DataContainer<ID, DATA> {
                 .findAny().get().getData();
     }
 
+    public void remove(ID id) {
+        listData.removeIf(pair -> pair.getId().equals(id));
+    }
+
     public Collection<Pair<ID, DATA>> getListData() {
         return listData;
     }
