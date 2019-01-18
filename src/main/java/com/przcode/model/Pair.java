@@ -1,19 +1,23 @@
 package com.przcode.model;
 
-public class Pair<K, V> {
-    private K id;
-    private V data;
+public class Pair<ID, DATA> {
+    private ID id;
+    private DATA data;
 
-    public Pair(K id, V data) {
+    public Pair(ID id, DATA data) {
         this.id = id;
         this.data = data;
     }
 
-    public K getId() {
+    public ID getId() {
         return id;
     }
 
-    public V getData() {
+    public DATA getData() {
         return data;
+    }
+
+    public void setData(DATA data) {
+        this.data = data;
     }
 }
