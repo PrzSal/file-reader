@@ -8,19 +8,19 @@ import com.przcode.model.Pair;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class DataContainer<K, V> {
-    private Collection<Pair<Id, Data>> listData;
+public class DataContainer<ID, DATA> {
+    private Collection<Pair<ID, DATA>> listData;
 
     public DataContainer() {
         this.listData = new ArrayList<>();
     }
 
-    public void load(DataProvider<Pair<K, V>> dataProvider) {
+    public void load(DataProvider<Pair<ID, DATA>> dataProvider) {
         this.listData = dataProvider.getAll();
     }
 
-    public void add(Id id, Data data) {
-        Pair<Id, Data> pair = new Pair<>(id, data);
+    public void add(ID id, DATA data) {
+        Pair<ID, DATA> pair = new Pair<>(id, data);
         listData.add(pair);
     }
 }

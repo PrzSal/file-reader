@@ -1,12 +1,16 @@
 package com.przcode.controller;
 
+import com.przcode.model.Data;
+import com.przcode.model.Id;
+import com.przcode.model.Pair;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class DataProvider<T> {
+public class DataProvider<PAIR> {
     private String nameFile;
     private ArrayList<String[]> listContent;
 
@@ -19,7 +23,18 @@ public class DataProvider<T> {
         return 0;
     }
 
-    public Collection<T> get(int page, int pageLength) {
+    public Collection<PAIR> getAll() {
+        this.readFile();
+        Collection<PAIR> dataList = new ArrayList<>();
+        for(String[] elem : listContent) {
+            String[] data = {elem[1], elem[2]};
+            PAIR pair = (PAIR) new Pair<>(new Id(Long.getLong(elem[0])), new Data(data));
+            dataList.add(pair);
+        }
+        return dataList;
+    }
+
+    public Collection<PAIR> get(int page, int pageLength) {
         return null;
     }
 
