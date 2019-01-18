@@ -19,4 +19,17 @@ public class Data {
         return Arrays.stream(data)
                 .collect(Collectors.joining());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Data data1 = (Data) o;
+        return Arrays.equals(data, data1.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(data);
+    }
 }
