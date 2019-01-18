@@ -24,11 +24,16 @@ public class DataContainer<ID, DATA> {
     }
 
     public void update(ID id,DATA data) {
-
         listData.stream()
                 .filter(pair -> pair.getId().equals(id))
                 .peek(pair -> pair.setData(data))
                 .collect(Collectors.toList());
+    }
+
+    public DATA findById(ID id) {
+        return listData.stream()
+                .filter(pair -> pair.getId().equals(id))
+                .findAny().get().getData();
     }
 
     public Collection<Pair<ID, DATA>> getListData() {
