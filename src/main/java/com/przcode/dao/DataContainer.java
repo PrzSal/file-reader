@@ -5,6 +5,7 @@ import com.przcode.model.Pair;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class DataContainer<ID, DATA> {
@@ -40,10 +41,38 @@ public class DataContainer<ID, DATA> {
         listData.removeIf(pair -> pair.getId().equals(id));
     }
 
-    public void printAll(){
+    public void printAll() {
         listData.forEach(pair -> System.out.println(pair.getId().toString() + pair.getData()));
     }
 
+    public void print(int from, int to) {
+        this.get(from, to).forEach(data -> System.out.println(data.toString()));
+    }
+
+    public void clear() {
+        listData.clear();
+    }
+
+    public Collection<DATA> get(int from, int to) {
+        Collection<Pair> filterPair = new ArrayList<>();
+        for (int i = 0; i < listData.size(); i++) {
+            if(i>=from && i <= to){
+                ((ArrayList<Pair>) filterPair).add((Pair) listData.toArray()[i]);
+            }
+        }
+        Collection<DATA> filterData = new ArrayList<>();
+        filterPair.forEach(pair -> ((ArrayList<DATA>) filterData).add((DATA) pair.getData()));
+        return filterData;
+    }
+
+    public Collection<DATA> filter(Predicate<DATA> filter) {
+        Collection<DATA> filterData = new ArrayList<>();
+        listData.forEach(pair -> ((ArrayList<DATA>) filterData).add(pair.getData()));
+        filterData.stream()
+                .filter(filter)
+                .collect(Collectors.toList());
+        return filterData;
+    }
     public Collection<Pair<ID, DATA>> getListData() {
         return listData;
     }
