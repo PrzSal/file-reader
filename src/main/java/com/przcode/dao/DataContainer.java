@@ -49,6 +49,10 @@ public class DataContainer<ID, DATA> {
         this.get(from, to).forEach(data -> System.out.println(data.toString()));
     }
 
+    public void clear() {
+        listData.clear();
+    }
+
     public Collection<DATA> get(int from, int to) {
         Collection<Pair> filterPair = new ArrayList<>();
         for (int i = 0; i < listData.size(); i++) {
