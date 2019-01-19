@@ -13,15 +13,19 @@ import java.util.Scanner;
 public class DataProviderImpl<PAIR> implements DataProvider<PAIR> {
     private String nameFile;
     private ArrayList<String[]> listContent;
+    private int countElement;
+
+
 
     public DataProviderImpl(String nameFile) {
         this.listContent = new ArrayList<>();
+        countElement = 0;
         this.nameFile = nameFile;
     }
 
     @Override
     public int count(){
-        return 0;
+        return countElement;
     }
 
     @Override
@@ -42,12 +46,15 @@ public class DataProviderImpl<PAIR> implements DataProvider<PAIR> {
     }
 
     private void readFile() {
+        this.countElement = 0;
+        listContent.clear();
         File file = new File(this.nameFile);
         try {
             Scanner read = new Scanner(file);
             while (read.hasNextLine()) {
                 String line = read.nextLine();
                 String[] splittedCode = line.split(";");
+                countElement+=splittedCode.length;
                 listContent.add(splittedCode);
             }
             read.close();
