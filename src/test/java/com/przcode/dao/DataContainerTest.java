@@ -20,6 +20,7 @@ public class DataContainerTest {
 
     DataProvider<Pair<Id, Data>> dataProvider;
     DataContainer<Id, Data> dataContainer;
+    Collection<Pair<Id, Data>> expectedList;
 
     @Test
     public void loadTest() {
@@ -28,12 +29,21 @@ public class DataContainerTest {
         dataContainer.load(dataProvider);
         String[] expectedData1 = {"France", "Paris"};
         String[] expectedData2 = {"Poland", "Warsaw"};
-        Collection<Pair<Id, Data>> expected = new ArrayList<>();
-        expected.add(new Pair<>(new Id(new Long(1)), new Data(expectedData1)));
-        expected.add(new Pair<>(new Id(new Long(2)), new Data(expectedData2)));
+        expectedList = new ArrayList<>();
+        expectedList.add(new Pair<>(new Id(new Long(1)), new Data(expectedData1)));
+        expectedList.add(new Pair<>(new Id(new Long(2)), new Data(expectedData2)));
         assertEquals(2, dataContainer.getListData().size());
-        assertEquals(expected, dataContainer.getListData());
+        assertEquals(expectedList, dataContainer.getListData());
     }
 
-
+    @Test
+    public void addTest() {
+        dataContainer = new DataContainer<>();
+        String[] newData = {"Germany", "Berlin"};
+        expectedList = new ArrayList<>();
+        expectedList.add(new Pair<>(new Id(new Long(3)), new Data(newData)));
+        dataContainer.add(new Id(new Long(3)), new Data(newData));
+        assertEquals(1, dataContainer.getListData().size());
+        assertEquals(expectedList, dataContainer.getListData());
+    }
 }
