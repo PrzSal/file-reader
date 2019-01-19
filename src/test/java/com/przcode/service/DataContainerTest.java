@@ -1,4 +1,4 @@
-package com.przcode.dao;
+package com.przcode.service;
 
 import com.przcode.controller.DataProvider;
 import com.przcode.controller.DataProviderImpl;
