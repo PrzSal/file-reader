@@ -16,6 +16,7 @@ public class DataContainer<ID, DATA> {
     }
 
     public void load(DataProvider<Pair<ID, DATA>> dataProvider) {
+        this.clear();
         this.listData = dataProvider.getAll();
     }
 
@@ -68,11 +69,11 @@ public class DataContainer<ID, DATA> {
     public Collection<DATA> filter(Predicate<DATA> filter) {
         Collection<DATA> filterData = new ArrayList<>();
         listData.forEach(pair -> ((ArrayList<DATA>) filterData).add(pair.getData()));
-        filterData.stream()
+        return filterData.stream()
                 .filter(filter)
-                .collect(Collectors.toList());
-        return filterData;
+                .collect(Collectors.toCollection(ArrayList::new));
     }
+
     public Collection<Pair<ID, DATA>> getListData() {
         return listData;
     }

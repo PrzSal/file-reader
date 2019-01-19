@@ -11,10 +11,6 @@ import org.junit.contrib.java.lang.system.SystemOutRule;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 public class DataContainerTest {
@@ -122,5 +118,17 @@ public class DataContainerTest {
         dataContainer.load(dataProvider);
         dataContainer.clear();
         assertEquals(0, dataContainer.getListData().size());
+    }
+
+    @Test
+    public void filterTest() {
+        dataProvider = new DataProviderImpl<>("test.csv");
+        dataContainer = new DataContainer<>();
+        dataContainer.load(dataProvider);
+        String[] expectedData1 = {"France", "Paris"};
+        Collection<Data> expectedListData = new ArrayList<>();
+        expectedListData.add(new Data(expectedData1));
+        assertEquals(1, dataContainer.filter(data -> data.equals(new Data(expectedData1))).size());
+        assertEquals(expectedListData, dataContainer.filter(data -> data.equals(new Data(expectedData1))));
     }
 }
