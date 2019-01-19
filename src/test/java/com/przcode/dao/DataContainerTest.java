@@ -1,17 +1,16 @@
 package com.przcode.dao;
 
 import com.przcode.controller.DataProvider;
+import com.przcode.controller.DataProviderImpl;
 import com.przcode.model.Data;
 import com.przcode.model.Id;
 import com.przcode.model.Pair;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
@@ -28,7 +27,7 @@ public class DataContainerTest {
 
     @Test
     public void loadTest() {
-        dataProvider = new DataProvider<>("test.csv");
+        dataProvider = new DataProviderImpl<>("test.csv");
         dataContainer = new DataContainer<>();
         dataContainer.load(dataProvider);
         String[] expectedData1 = {"France", "Paris"};
@@ -53,7 +52,7 @@ public class DataContainerTest {
 
     @Test
     public void updateTest() {
-        dataProvider = new DataProvider<>("test.csv");
+        dataProvider = new DataProviderImpl<>("test.csv");
         dataContainer = new DataContainer<>();
         dataContainer.load(dataProvider);
         String[] newData = {"Germany", "Berlin"};
@@ -69,7 +68,7 @@ public class DataContainerTest {
 
     @Test
     public void findByIdTest() {
-        dataProvider = new DataProvider<>("test.csv");
+        dataProvider = new DataProviderImpl<>("test.csv");
         dataContainer = new DataContainer<>();
         dataContainer.load(dataProvider);
         Data data = dataContainer.findById(new Id(new Long(1)));
@@ -80,7 +79,7 @@ public class DataContainerTest {
 
     @Test
     public void removeTest() {
-        dataProvider = new DataProvider<>("test.csv");
+        dataProvider = new DataProviderImpl<>("test.csv");
         dataContainer = new DataContainer<>();
         dataContainer.load(dataProvider);
         String[] expectedData1 = {"France", "Paris"};
@@ -96,7 +95,7 @@ public class DataContainerTest {
 
     @Test
     public void printAll() {
-        dataProvider = new DataProvider<>("test.csv");
+        dataProvider = new DataProviderImpl<>("test.csv");
         dataContainer = new DataContainer<>();
         dataContainer.load(dataProvider);
         dataContainer.printAll();
