@@ -62,4 +62,15 @@ public class DataContainerTest {
         assertEquals(2, dataContainer.getListData().size());
         assertEquals(expectedList, dataContainer.getListData());
     }
+
+    @Test
+    public void findByIdTest() {
+        dataProvider = new DataProvider<>("test.csv");
+        dataContainer = new DataContainer<>();
+        dataContainer.load(dataProvider);
+        Data data = dataContainer.findById(new Id(new Long(1)));
+        String[] expectedData1 = {"France", "Paris"};
+        Data expectedData = new Data(expectedData1);
+        assertEquals(expectedData, data);
+    }
 }
