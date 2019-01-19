@@ -114,4 +114,13 @@ public class DataContainerTest {
         assertEquals("PolandWarsaw\n" +
                 "GermanyBerlin\n", systemOutRule.getLog());
     }
+
+    @Test
+    public void clearTest() {
+        dataProvider = new DataProviderImpl<>("test.csv");
+        dataContainer = new DataContainer<>();
+        dataContainer.load(dataProvider);
+        dataContainer.clear();
+        assertEquals(0, dataContainer.getListData().size());
+    }
 }
