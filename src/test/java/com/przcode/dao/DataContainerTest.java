@@ -94,12 +94,24 @@ public class DataContainerTest {
     }
 
     @Test
-    public void printAll() {
+    public void printAllTest() {
         dataProvider = new DataProviderImpl<>("test.csv");
         dataContainer = new DataContainer<>();
         dataContainer.load(dataProvider);
         dataContainer.printAll();
         assertEquals("1FranceParis\n" +
                 "2PolandWarsaw\n", systemOutRule.getLog());
+    }
+
+    @Test
+    public void printTest() {
+        dataProvider = new DataProviderImpl<>("test.csv");
+        dataContainer = new DataContainer<>();
+        dataContainer.load(dataProvider);
+        String[] expectedData3 = {"Germany", "Berlin"};
+        dataContainer.getListData().add(new Pair<>(new Id(new Long(3)), new Data(expectedData3)));
+        dataContainer.print(1, 2);
+        assertEquals("PolandWarsaw\n" +
+                "GermanyBerlin\n", systemOutRule.getLog());
     }
 }
