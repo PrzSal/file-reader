@@ -4,7 +4,9 @@ import com.przcode.controller.DataProvider;
 import com.przcode.model.Data;
 import com.przcode.model.Id;
 import com.przcode.model.Pair;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
@@ -17,10 +19,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
 public class DataContainerTest {
-
     DataProvider<Pair<Id, Data>> dataProvider;
     DataContainer<Id, Data> dataContainer;
     Collection<Pair<Id, Data>> expectedList;
+
+    @Rule
+    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
     @Test
     public void loadTest() {
@@ -88,5 +92,15 @@ public class DataContainerTest {
         dataContainer.remove(new Id(new Long(2)));
         assertEquals(2, dataContainer.getListData().size());
         assertEquals(expectedList, dataContainer.getListData());
+    }
+
+    @Test
+    public void printAll() {
+        dataProvider = new DataProvider<>("test.csv");
+        dataContainer = new DataContainer<>();
+        dataContainer.load(dataProvider);
+        dataContainer.printAll();
+        assertEquals("1FranceParis\n" +
+                "2PolandWarsaw\n", systemOutRule.getLog());
     }
 }
