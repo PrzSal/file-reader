@@ -46,4 +46,20 @@ public class DataContainerTest {
         assertEquals(1, dataContainer.getListData().size());
         assertEquals(expectedList, dataContainer.getListData());
     }
+
+    @Test
+    public void updateTest() {
+        dataProvider = new DataProvider<>("test.csv");
+        dataContainer = new DataContainer<>();
+        dataContainer.load(dataProvider);
+        String[] newData = {"Germany", "Berlin"};
+        dataContainer.update(new Id(new Long(2)), new Data(newData));
+        String[] expectedData1 = {"France", "Paris"};
+        String[] expectedData2 = {"Germany", "Berlin"};
+        expectedList = new ArrayList<>();
+        expectedList.add(new Pair<>(new Id(new Long(1)), new Data(expectedData1)));
+        expectedList.add(new Pair<>(new Id(new Long(2)), new Data(expectedData2)));
+        assertEquals(2, dataContainer.getListData().size());
+        assertEquals(expectedList, dataContainer.getListData());
+    }
 }
